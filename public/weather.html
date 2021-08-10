@@ -1,0 +1,191 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css"
+        integrity="sha512-PgQMlq+nqFLV4ylk1gwUOgm6CtIIXkKwaIHp/PAIWHzig/lKZSEGKEysh0TCVbHJXCLN7WetD8TFecIky75ZfQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <!-- <link rel="stylesheet" href="/public/css/weather.css"> -->
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Rubik&display=swap');
+
+
+*{
+    margin: 0 ;
+    padding: 0;
+}
+body{
+    background-image: linear-gradient(to top, rgb(181, 247, 241), rgb(223, 225, 228)) ;
+    background-repeat: no-repeat;
+    height: 1000px;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+
+}
+.box{padding: 3rem 0px 0px 0px;
+    height: 400px;
+    width: 240px;
+    border-radius: 10px;
+    margin-top: 150px;
+    background-color: rgb(95, 178, 199);
+    box-shadow: 5px  16px 50px rgb(118, 247, 215);
+
+}
+#sun
+{   font-size: 80px;
+    color:yellow;
+    padding: 60px 0;
+    display: flex;
+    justify-content: center;
+}
+
+#cloud
+{   font-size: 80px;
+    color:rgb(231, 224, 224);
+    padding: 60px 0;
+    display: flex;
+    justify-content: center;
+}
+
+#rain
+{   font-size: 80px;
+    color:rgb(219, 211, 211);
+    padding: 60px 0;
+    display: flex;
+    justify-content: center;
+}
+.location{
+padding: 8px 0;
+font-size: 1.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+#date{
+    padding: 4px 0px 15px 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.temp{
+    padding: 15px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.tempMinMax{
+    padding: 4px 0px 0px 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color:rgb(123, 130, 143);
+}
+
+.info{padding-bottom: 50px;
+    border-radius: 10px;
+    padding-top: 40px;
+    font-family: 'Rubik', sans-serif;
+    background-color: rgb(169, 219, 235);
+    animation: animate 4s ease-in-out ;
+    animation-iteration-count: infinite;
+}
+#date{
+color:rgb(123, 130, 143);
+}
+
+@keyframes animate{
+    0%,100%{
+    clip-path: polygon(63% 0, 85% 3%, 100% 9%, 100% 100%, 0 100%, 0 5%, 8% 4%, 26% 1%, 43% 1%);
+
+
+    }
+    50%{
+        clip-path: polygon(64% 4%, 85% 3%, 100% 1%, 100% 100%, 0 100%, 0 3%, 8% 4%, 26% 4%, 47% 4%);
+
+    }
+}
+#streetView{
+    color:darkgray
+}
+
+
+
+        </style>
+    <title>Weather</title>
+</head>
+<body>
+    <div class="box">
+        
+        <div id="weatherCondition">
+            
+        </div>
+        <div class="info">
+            <h2 class="location"><i class="fas fa-street-view" id="streetView"></i>{%location%},{%country%}</h2>
+            <p id="date"></p>
+            <h1 class="temp">{%tempVal%} °C</h1>
+            <p class="tempMinMax"> Min {%tempMin%} °C | Max {%tempMax%} °C </p>
+        </div>
+    </div>
+
+    <script>
+
+
+        const currentDate = document.getElementById('date');
+        const weatherCondition = document.getElementById('weatherCondition');
+        const tempStatus = "{%tempStatus%}";
+        if(tempStatus == 'Sunny'){
+            weatherCondition.innerHTML = `<i class="fas fa-sun" id="sun"></i>`;
+        }
+        else if(tempStatus == 'Clouds'){
+            weatherCondition.innerHTML = `<i class="fas fa-cloud" id="cloud" ></i>`
+        }
+        
+        else if(tempStatus == 'Rainy'){
+            weatherCondition.innerHTML = `<i class="fas fa-cloud-rain" id="rain"></i>`;
+        }
+        
+        const getCurrentDateTime = ()=>{
+            let now = new Date();
+            var weekDay = new Array(7);
+            weekDay[0]= "Sun";
+            weekDay[1]= "Mon";
+            weekDay[2]= "Tue";
+            weekDay[3]= "Wed";
+            weekDay[4]= "Thu";
+            weekDay[5]= "Fri";
+            weekDay[6]= "Sat";
+            var month = now.getMonth();
+            var allMonths = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
+            let dayNow = weekDay[now.getDay()];
+            let dateToday = now.getDate();
+            let monthNow = allMonths[month];
+            let hoursNow = now.getHours();
+            let minsNow = now.getMinutes();
+            let period = 'AM';
+            
+            if (hoursNow > 11) {
+                period = 'PM';
+                if (hoursNow > 12) hoursNow -= 12;
+            }
+            if (minsNow < 10) {
+                minsNow = "0" + minsNow;
+            }
+            
+            let finalDate = `${dayNow} | ${monthNow} ${dateToday} | ${hoursNow}:${minsNow} ${period}`;
+            
+            console.log(finalDate);
+
+            return finalDate;
+        }
+        currentDate.innerHTML = getCurrentDateTime();
+
+
+    
+    </script>
+</body>
+</html>

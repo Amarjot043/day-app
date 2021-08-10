@@ -1,0 +1,89 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik&display=swap');
+
+
+*{
+    margin: 0 ;
+    padding: 0;
+}
+body{
+    background-image: linear-gradient(to top, rgb(181, 247, 241), rgb(223, 225, 228)) ;
+    background-repeat: no-repeat;
+    height: 1000px;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+
+}
+.box{padding: 3rem 0px 0px 0px;
+    height: 400px;
+    width: 240px;
+    border-radius: 10px;
+    margin-top: 150px;
+    background-color: rgb(95, 178, 199);
+    box-shadow: 5px  16px 50px rgb(118, 247, 215);
+
+}
+#sun
+{   font-size: 80px;
+    color:yellow;
+
+    padding: 60px 0;
+    display: flex;
+    justify-content: center;
+}
+.location{
+padding: 8px 0;
+font-size: 1.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+#date{
+    padding: 4px 0px 15px 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.temp{
+    padding: 15px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.tempMinMax{
+    padding: 4px 0px 0px 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color:rgb(123, 130, 143);
+}
+
+.info{padding-bottom: 50px;
+    border-radius: 10px;
+    padding-top: 40px;
+    font-family: 'Rubik', sans-serif;
+    background-color: rgb(169, 219, 235);
+    animation: animate 4s ease-in-out ;
+    animation-iteration-count: infinite;
+}
+#date{
+color:rgb(123, 130, 143);
+}
+
+@keyframes animate{
+    0%,100%{
+    clip-path: polygon(63% 0, 85% 3%, 100% 9%, 100% 100%, 0 100%, 0 5%, 8% 4%, 26% 1%, 43% 1%);
+
+
+    }
+    50%{
+        clip-path: polygon(64% 4%, 85% 3%, 100% 1%, 100% 100%, 0 100%, 0 3%, 8% 4%, 26% 4%, 47% 4%);
+
+    }
+}
+#streetView{
+    color:darkgray
+}
+
+
